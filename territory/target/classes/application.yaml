@@ -1,7 +1,24 @@
 server:
-  port: 8080
-  
+    port: 8080
+    error:
+        include-message: always
+        
 spring:
-  application:
-    name: territory
-    
+    application:
+        name: territory
+        
+    datasource:
+        username: leo    
+        password: password
+        url: jdbc:postgresql://localhost:5432/countryooze #this ideally could be a separate db
+        
+    jpa:
+        hibernate:
+            ddl-auto: create-drop #update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                '[format_sql]': true
+        show-sql: true
+
+      
