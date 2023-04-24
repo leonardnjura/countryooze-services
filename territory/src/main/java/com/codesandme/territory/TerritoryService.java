@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TerritoryService {
 	
 	private final TerritoryRepository territoryRepository;
+	private final RestTemplate restTemplate;
 	
 	public Territory registerTerritory(TerritoryRegistrationRequest request) {
 		Territory territory = Territory.builder()
@@ -27,6 +29,7 @@ public class TerritoryService {
 				.build();
 
 		// TODO check if iso2 is valid
+		// TODO send notification
 		
 		Optional<Territory> territoryOptional = territoryRepository.findTerritoryByIso2Code(territory.getIso2Code());
 		if(territoryOptional.isPresent()) {
@@ -34,6 +37,14 @@ public class TerritoryService {
 		}
 
 		Territory savedInsert = territoryRepository.saveAndFlush(territory);
+		
+		InfractionCheckResponse infractionCheckResponse = restTemplate.getForObject(
+				"http://localhost:8081/api/v1/infraction-check/{territoryId}",
+				InfractionCheckResponse.class, savedInsert.getId());
+ 
+		if(infractionCheckResponse.isInfraction()) {
+			throw new IllegalStateException("!!infraction");
+		}
 		
 		log.info("new territory registration {}", savedInsert);
 		return savedInsert;
