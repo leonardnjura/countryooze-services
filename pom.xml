@@ -10,6 +10,7 @@
   
   <modules>
     <module>territory</module>
+    <module>infraction</module>
   </modules>
        
   <properties>

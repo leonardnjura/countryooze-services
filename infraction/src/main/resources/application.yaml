@@ -1,16 +1,16 @@
 server:
-    port: 8080
+    port: 8081
     error:
         include-message: always
         
 spring:
     application:
-        name: territory
-        
+        name: infraction
+
     datasource:
         username: leo    
         password: password
-        url: jdbc:postgresql://localhost:5432/countryooze #this ideally could be a separate db
+        url: jdbc:postgresql://localhost:5432/countryooze #ideally submodule should have own db
         
     jpa:
         hibernate:
@@ -21,4 +21,4 @@ spring:
                 '[format_sql]': true
         show-sql: true
 
-      
+              
