@@ -39,7 +39,7 @@ public class TerritoryService {
 		Territory savedInsert = territoryRepository.saveAndFlush(territory);
 		
 		InfractionCheckResponse infractionCheckResponse = restTemplate.getForObject(
-				"http://localhost:8081/api/v1/infraction-check/{territoryId}",
+				"http://INFRACTION/api/v1/infraction-check/{territoryId}",
 				InfractionCheckResponse.class, savedInsert.getId());
  
 		if(infractionCheckResponse.isInfraction()) {

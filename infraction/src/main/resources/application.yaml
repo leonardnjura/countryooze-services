@@ -14,11 +14,16 @@ spring:
         
     jpa:
         hibernate:
-            ddl-auto: create-drop #update
+            ddl-auto: create-drop #update in production!
         properties:
             hibernate:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
                 '[format_sql]': true
         show-sql: true
 
-              
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+                  

@@ -11,6 +11,7 @@
   <modules>
     <module>territory</module>
     <module>infraction</module>
+    <module>eureka-server</module>
   </modules>
        
   <properties>
@@ -20,6 +21,7 @@
     <spring.boot.maven.plugin.version>3.0.5</spring.boot.maven.plugin.version>
     <spring.boot.dependencies.version>3.0.5</spring.boot.dependencies.version>
     <spring.boot.lombok.version>1.18.26</spring.boot.lombok.version>
+    <spring-cloud.version>2022.0.1</spring-cloud.version>
   </properties>
   
   <dependencyManagement>
@@ -32,6 +34,13 @@
         <scope>import</scope>
         <type>pom</type>
       </dependency>
+      <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>${spring-cloud.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
     </dependencies>
   </dependencyManagement>
           
